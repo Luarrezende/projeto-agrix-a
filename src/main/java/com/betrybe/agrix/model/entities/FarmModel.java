@@ -21,6 +21,9 @@ public class FarmModel {
   private String name;
   private Double size;
 
+  public FarmModel() {
+  }
+
   /**
    * contructor com coisas.
    */
@@ -28,8 +31,5 @@ public class FarmModel {
     this.id = id;
     this.name = name;
     this.size = size;
-  }
-
-  public FarmModel() {
   }
 }

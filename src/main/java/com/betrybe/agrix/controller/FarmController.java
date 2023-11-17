@@ -40,4 +40,14 @@ public class FarmController {
     List<FarmModel> farms = farmService.getAll();
     return ResponseEntity.status(HttpStatus.OK).body(farms);
   }
+
+  // @GetMapping("/{id}")
+  // public ResponseEntity<FarmModel> getById(Long id) {
+  //   try {
+  //     FarmModel farm = farmService.getById(id);
+  //     return ResponseEntity.ok(farm);
+  //   } catch (FarmNotFoundException e) {
+  //       return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+  //   }
+  // }
 }
