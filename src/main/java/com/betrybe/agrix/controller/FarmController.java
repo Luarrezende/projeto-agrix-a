@@ -1,7 +1,7 @@
 package com.betrybe.agrix.controller;
 
 import com.betrybe.agrix.controller.dto.FarmDto;
-// import com.betrybe.agrix.controller.dto.FarmDto;
+import com.betrybe.agrix.exceptions.src.main.java.com.betrybe.agrix.exceptions.NotFoundException;
 import com.betrybe.agrix.model.entities.FarmModel;
 import com.betrybe.agrix.service.FarmService;
 import java.util.List;
@@ -42,13 +42,14 @@ public class FarmController {
     return ResponseEntity.status(HttpStatus.OK).body(farms);
   }
 
-  //  @GetMapping("/{id}")
-  //  public ResponseEntity<FarmModel> getById(Long id) {
-  //    try {
-  //      FarmModel farm = farmService.getById(id);
-  //      return ResponseEntity.ok(farm);
-  //    } catch (FarmNotFoundException e) {
-  //        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-  //    }
-  //  }
+  /**
+    * get farm to id.
+    */
+  @GetMapping("/{id}")
+  public ResponseEntity<FarmModel> getById(Long id) {
+    FarmModel farm = farmService.getById(id);
+    return ResponseEntity.status(HttpStatus.OK).body(farm);
+  }
+
+  
 }
