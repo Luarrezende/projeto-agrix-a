@@ -1,5 +1,6 @@
 package com.betrybe.agrix.controller;
 
+import com.betrybe.agrix.controller.dto.FarmDto;
 // import com.betrybe.agrix.controller.dto.FarmDto;
 import com.betrybe.agrix.model.entities.FarmModel;
 import com.betrybe.agrix.service.FarmService;
@@ -30,8 +31,8 @@ public class FarmController {
     * Create Farm.
     */
   @PostMapping()
-  public ResponseEntity<FarmModel> insertFarm(@RequestBody FarmModel farmModel) {
-    FarmModel newFarm = farmService.insertFarm(farmModel);
+  public ResponseEntity<FarmModel> insertFarm(@RequestBody FarmDto farmDto) {
+    FarmModel newFarm = farmService.insertFarm(farmDto.toFarm());
     return ResponseEntity.status(HttpStatus.CREATED).body(newFarm);
   }
 
@@ -41,13 +42,13 @@ public class FarmController {
     return ResponseEntity.status(HttpStatus.OK).body(farms);
   }
 
-  // @GetMapping("/{id}")
-  // public ResponseEntity<FarmModel> getById(Long id) {
-  //   try {
-  //     FarmModel farm = farmService.getById(id);
-  //     return ResponseEntity.ok(farm);
-  //   } catch (FarmNotFoundException e) {
-  //       return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-  //   }
-  // }
+  //  @GetMapping("/{id}")
+  //  public ResponseEntity<FarmModel> getById(Long id) {
+  //    try {
+  //      FarmModel farm = farmService.getById(id);
+  //      return ResponseEntity.ok(farm);
+  //    } catch (FarmNotFoundException e) {
+  //        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+  //    }
+  //  }
 }
