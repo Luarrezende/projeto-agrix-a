@@ -58,9 +58,11 @@ public class FarmController {
    * cria Crop controller.
    */
   @PostMapping("/{farmId}/crops")
-  public CropDto createCrop(@PathVariable Long farmId, @RequestBody CropDto cropDto) {
+  public ResponseEntity<CropDto> createCrop(@PathVariable Long farmId,
+      @RequestBody CropDto cropDto) {
     CropModel cropModel = farmService.createCrop(farmId, cropDto.toCrop());
     
-    return CropDto.fromCropModel(cropModel, farmId);
+    CropDto crop = CropDto.fromCropModel(cropModel, farmId);
+    return ResponseEntity.status(HttpStatus.CREATED).body(crop);
   }
 }

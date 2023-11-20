@@ -18,8 +18,9 @@ public class FarmService {
   private CropRepository cropRepository;
 
   @Autowired
-  public FarmService(FarmRepository farmRepository) {
+  public FarmService(FarmRepository farmRepository, CropRepository cropRepository) {
     this.farmRepository = farmRepository;
+    this.cropRepository = cropRepository;
   }
 
   public FarmModel insertFarm(FarmModel farmModel) {
@@ -39,13 +40,12 @@ public class FarmService {
    * cria crop.
    */
   public CropModel createCrop(Long farmId, CropModel cropModel) {
-    FarmModel farmModel = getById(farmId);
+    FarmModel farmModel = this.getById(farmId);
     
     cropModel.setFarmModel(farmModel);
     CropModel cropCreated = cropRepository.save(cropModel);
     
     farmModel.getCrops().add(cropCreated);
-    farmRepository.save(farmModel);
 
     return cropCreated;
   }
