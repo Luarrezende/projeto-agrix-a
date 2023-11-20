@@ -1,6 +1,6 @@
 package com.betrybe.agrix.service;
 
-import com.betrybe.agrix.exceptions.src.main.java.com.betrybe.agrix.exceptions.NotFoundException;
+import com.betrybe.agrix.exceptions.src.main.java.com.betrybe.agrix.exceptions.FarmNotFoundException;
 import com.betrybe.agrix.model.entities.CropModel;
 import com.betrybe.agrix.model.entities.FarmModel;
 import com.betrybe.agrix.model.repositories.CropRepository;
@@ -32,7 +32,7 @@ public class FarmService {
 
   public FarmModel getById(Long id) {
     return farmRepository.findById(id)
-            .orElseThrow(() -> new NotFoundException("Fazenda não encontrada!"));
+            .orElseThrow(FarmNotFoundException::new);
   }
 
   /**

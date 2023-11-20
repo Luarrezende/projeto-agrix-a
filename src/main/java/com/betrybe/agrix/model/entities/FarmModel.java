@@ -7,6 +7,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 /**
@@ -24,6 +27,7 @@ public class FarmModel {
   private Double size;
 
   @OneToMany(mappedBy = "farmModel")
+  @JsonIgnore
   private List<CropModel> crops;
 
   public FarmModel() {
