@@ -65,4 +65,14 @@ public class FarmController {
     CropDto crop = CropDto.fromCropModel(cropModel, farmId);
     return ResponseEntity.status(HttpStatus.CREATED).body(crop);
   }
+
+  @GetMapping("/{farmId}/crops")
+  public ResponseEntity<List<CropDto>> getFarmCrops(@PathVariable Long farmId) {
+    List<CropModel> crops = farmService.getFarmCrops(farmId);
+    List<CropDto> cropsDto = crops.stream()
+        .map(crop -> new CropDto(crop.getId(), crop.getName(), crop.getPlantedArea(), farmId))
+        .toList();
+
+    return ResponseEntity.status(HttpStatus.OK).body(cropsDto);
+  }
 }
