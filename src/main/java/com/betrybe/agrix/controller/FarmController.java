@@ -66,6 +66,9 @@ public class FarmController {
     return ResponseEntity.status(HttpStatus.CREATED).body(crop);
   }
 
+  /**
+   * pega Crop controller.
+   */
   @GetMapping("/{farmId}/crops")
   public ResponseEntity<List<CropDto>> getFarmCrops(@PathVariable Long farmId) {
     List<CropModel> crops = farmService.getFarmCrops(farmId);
