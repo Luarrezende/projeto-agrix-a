@@ -1,7 +1,8 @@
 package com.betrybe.agrix.controller;
 
+import com.betrybe.agrix.controller.dto.CropDto;
 import com.betrybe.agrix.controller.dto.FarmDto;
-import com.betrybe.agrix.exceptions.src.main.java.com.betrybe.agrix.exceptions.NotFoundException;
+import com.betrybe.agrix.model.entities.CropModel;
 import com.betrybe.agrix.model.entities.FarmModel;
 import com.betrybe.agrix.service.FarmService;
 import java.util.List;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,13 +45,22 @@ public class FarmController {
   }
 
   /**
-    * get farm to id.
+    * get farm with id.
     */
   @GetMapping("/{id}")
-  public ResponseEntity<FarmModel> getById(Long id) {
+  public ResponseEntity<FarmDto> getById(@PathVariable Long id) {
     FarmModel farm = farmService.getById(id);
-    return ResponseEntity.status(HttpStatus.OK).body(farm);
+    FarmDto farmDto = new FarmDto(farm.getId(), farm.getName(), farm.getSize());
+    return ResponseEntity.status(HttpStatus.OK).body(farmDto);
   }
 
-  
+  /**
+   * cria Crop controller.
+   */
+  @PostMapping("/{farmId}/crops")
+  public CropDto createCrop(@PathVariable Long farmId, @RequestBody CropDto cropDto) {
+    CropModel cropModel = farmService.createCrop(farmId, cropDto.toCrop());
+    
+    return CropDto.fromCropModel(cropModel, farmId);
+  }
 }

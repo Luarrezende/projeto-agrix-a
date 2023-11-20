@@ -4,7 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 import lombok.Data;
 
 /**
@@ -20,6 +22,9 @@ public class FarmModel {
 
   private String name;
   private Double size;
+
+  @OneToMany(mappedBy = "farmModel")
+  private List<CropModel> crops;
 
   public FarmModel() {
   }

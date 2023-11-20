@@ -21,6 +21,7 @@ public class CropModel {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
+
   @Column(name = "planted_area")
   private Double plantedArea;
 
